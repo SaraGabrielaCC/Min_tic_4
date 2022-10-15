@@ -1,19 +1,20 @@
 package mintic.Reto41.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "machine")
-public class Machine {
+public class Machine implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String brand;
+    @Column(name = "years")
     private Integer year;
     private String description;
 
@@ -21,7 +22,6 @@ public class Machine {
     @JoinColumn(name = "categoryId")
     @JsonIgnoreProperties("machines")
     private Category category;
-
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "machine")
     @JsonIgnoreProperties({"machine","client"})
