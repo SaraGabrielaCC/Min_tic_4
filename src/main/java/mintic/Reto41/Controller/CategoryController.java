@@ -10,16 +10,18 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Category")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
     @GetMapping("/all")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<Category> getCategory(){
         return categoryService.getAll();
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Optional<Category> getCategory(@PathVariable("id") int Id) {
         return categoryService.getCategory(Id);
     }

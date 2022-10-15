@@ -11,16 +11,18 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Machine")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class MachineController {
     @Autowired
     private MachineService machineService;
     @GetMapping("/all")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<Machine> getMachines(){
         return machineService.getAll();
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public Optional<Machine> getMachine(@PathVariable("id") int machineId) {
         return machineService.getMachine(machineId);
     }
