@@ -17,14 +17,14 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
-    @GetMapping("/all")
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/all")
     public List<Client> getClients(){
         return clientService.getAll();
     }
 
-    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/{id}")
     public Optional<Client> getClient(@PathVariable("id") int clientId) {
         return clientService.getClient(clientId);
     }
@@ -33,14 +33,14 @@ public class ClientController {
     public Client save(@RequestBody Client client) {
         return clientService.save(client);
     }
-    @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/update")
     public Client update(@RequestBody Client client) {
         return clientService.update(client);
     }
 
-    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id){
         return clientService.deleteClient(id);
     }

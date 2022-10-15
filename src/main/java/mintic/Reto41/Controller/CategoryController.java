@@ -14,32 +14,32 @@ import java.util.Optional;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
-    @GetMapping("/all")
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/all")
     public List<Category> getCategory(){
         return categoryService.getAll();
     }
 
-    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/{id}")
     public Optional<Category> getCategory(@PathVariable("id") int Id) {
         return categoryService.getCategory(Id);
     }
 
-    @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/save")
     public Category save(@RequestBody Category category) {
         return categoryService.save(category);
     }
 
-    @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/update")
     public Category update(@RequestBody Category category){
         return categoryService.update(category);
     }
 
-    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id){
         return categoryService.deleteCategory(id);
     }

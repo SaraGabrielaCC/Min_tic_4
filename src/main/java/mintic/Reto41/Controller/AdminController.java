@@ -14,32 +14,29 @@ import java.util.Optional;
 
 public class AdminController {
     private AdminService adminService;
-    @GetMapping("/all")
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/all")
     public List<Admin> getAdmin(){
         return adminService.getAll();
     }
 
-    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/{id}")
     public Optional<Admin> getAdmin(@PathVariable("id") int Id) {
         return adminService.getAdmin(Id);
     }
-
-    @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/save")
     public Admin save(@RequestBody Admin admin) {
         return adminService.save(admin);
     }
-
-    @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/update")
     public Admin update(@RequestBody Admin admin){
         return adminService.update(admin);
     }
-
-    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id){
         return adminService.deleteAdmin(id);
     }

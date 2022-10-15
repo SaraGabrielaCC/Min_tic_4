@@ -15,30 +15,30 @@ import java.util.Optional;
 public class MachineController {
     @Autowired
     private MachineService machineService;
-    @GetMapping("/all")
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/all")
     public List<Machine> getMachines(){
         return machineService.getAll();
     }
 
-    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/{id}")
     public Optional<Machine> getMachine(@PathVariable("id") int machineId) {
         return machineService.getMachine(machineId);
     }
-    @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/save")
     public Machine save(@RequestBody Machine machine) {
         return machineService.save(machine);
     }
-    @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/update")
     public Machine update(@RequestBody Machine machine) {
         return machineService.update(machine);
     }
 
-    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id){
         return machineService.deleteMachine(id);
     }
