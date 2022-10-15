@@ -37,7 +37,7 @@ public class MachineService {
     public Machine update(Machine machine){
         if(machine.getId()!=null){
             Optional<Machine> e= machineRepository.getMachine(machine.getId());
-            if(!e.isPresent()){
+            if(e.isPresent()){
                 if(machine.getName()!=null){
                     e.get().setName(machine.getName());
                 }

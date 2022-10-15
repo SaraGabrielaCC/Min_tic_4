@@ -38,7 +38,7 @@ public class ReservationService {
     public Reservation update(Reservation reservation){
         if(reservation.getIdReservation()!=null){
             Optional<Reservation> e= reservationRepository.getReservation(reservation.getIdReservation());
-            if(!e.isPresent()){
+            if(e.isPresent()){
 
                 if(reservation.getStartDate()!=null){
                     e.get().setStartDate(reservation.getStartDate());
