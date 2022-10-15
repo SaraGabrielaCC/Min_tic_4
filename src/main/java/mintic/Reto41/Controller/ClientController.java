@@ -17,13 +17,13 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
-    @ResponseStatus(HttpStatus.CREATED)
+
     @GetMapping("/all")
     public List<Client> getClients(){
         return clientService.getAll();
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+
     @GetMapping("/{id}")
     public Optional<Client> getClient(@PathVariable("id") int clientId) {
         return clientService.getClient(clientId);

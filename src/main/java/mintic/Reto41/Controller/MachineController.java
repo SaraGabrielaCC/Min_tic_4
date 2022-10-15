@@ -15,13 +15,13 @@ import java.util.Optional;
 public class MachineController {
     @Autowired
     private MachineService machineService;
-    @ResponseStatus(HttpStatus.CREATED)
+
     @GetMapping("/all")
     public List<Machine> getMachines(){
         return machineService.getAll();
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+
     @GetMapping("/{id}")
     public Optional<Machine> getMachine(@PathVariable("id") int machineId) {
         return machineService.getMachine(machineId);

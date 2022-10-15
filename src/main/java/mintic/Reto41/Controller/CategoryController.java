@@ -14,13 +14,11 @@ import java.util.Optional;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
-    @ResponseStatus(HttpStatus.CREATED)
     @GetMapping("/all")
     public List<Category> getCategory(){
         return categoryService.getAll();
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @GetMapping("/{id}")
     public Optional<Category> getCategory(@PathVariable("id") int Id) {
         return categoryService.getCategory(Id);

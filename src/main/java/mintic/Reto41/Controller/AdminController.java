@@ -13,14 +13,15 @@ import java.util.Optional;
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 
 public class AdminController {
+    @Autowired
     private AdminService adminService;
-    @ResponseStatus(HttpStatus.CREATED)
+
     @GetMapping("/all")
     public List<Admin> getAdmin(){
         return adminService.getAll();
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+
     @GetMapping("/{id}")
     public Optional<Admin> getAdmin(@PathVariable("id") int Id) {
         return adminService.getAdmin(Id);
