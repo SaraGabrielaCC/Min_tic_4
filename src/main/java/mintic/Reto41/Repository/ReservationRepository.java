@@ -1,9 +1,13 @@
 package mintic.Reto41.Repository;
 
+import mintic.Reto41.Controller.DTOs.TopClients;
+import mintic.Reto41.Entities.Client;
 import mintic.Reto41.Entities.Reservation;
 import mintic.Reto41.Repository.CrudRepository.ReservationCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +37,13 @@ public class ReservationRepository {
         return reservationCrudRepository.findAllByStatus(sts);
     }
 
-    public List<Object[]> getTopClients(){
-        return reservationCrudRepository.getTopClients();
+    public List<TopClients> getTopClients(){
+        List<TopClients> res= new ArrayList<>();
+        List<Object[]> report= reservationCrudRepository.getTopClients();
+        for(int i=0; i < report.size(); i++){
+            res.add(new TopClients((Long)report.get(i)[1], (Client) report.get(i)[0]));
+        }
+        return res;
+
     }
 }

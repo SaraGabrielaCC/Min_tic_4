@@ -4,20 +4,19 @@ import mintic.Reto41.Entities.Client;
 
 public class TopClients {
 
-    private int total;
+    private Long total;
     private Client client;
 
-    public TopClients(int total, Client client){
-        this.total=total;
-        this.client=client;
+    public TopClients(Long total, Client client) {
+        this.total = total;
+        this.client = client;
     }
 
-
-    public int getTotal() {
+    public Long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(Long total) {
         this.total = total;
     }
 
@@ -29,3 +28,4 @@ public class TopClients {
         this.client = client;
     }
 }
+

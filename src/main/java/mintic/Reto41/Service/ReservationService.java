@@ -2,6 +2,7 @@ package mintic.Reto41.Service;
 
 import mintic.Reto41.Controller.DTOs.StatusAccount;
 import mintic.Reto41.Controller.DTOs.TopClients;
+
 import mintic.Reto41.Entities.Client;
 import mintic.Reto41.Entities.Reservation;
 import mintic.Reto41.Repository.ReservationRepository;
@@ -99,17 +100,6 @@ public class ReservationService {
 
     }
     public List<TopClients> getTopclients(){
-        List<TopClients> tc=new ArrayList<>();
-        List<Object[]> result= reservationRepository.getTopClients();
-
-        for(int i=0;i<result.size();i++){
-            int total=Integer.parseInt(result.get(i)[1].toString());
-            Client client= (Client) result.get(i)[0];
-            TopClients topClient=new TopClients(total,client);
-            tc.add(topClient);
-        }
-        return tc;
+        return reservationRepository.getTopClients();
     }
-
-
 }
