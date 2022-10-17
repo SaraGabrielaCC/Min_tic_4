@@ -1,7 +1,7 @@
 package mintic.Reto41.Controller;
 
-import mintic.Reto41.Controller.DTOs.CompletedAndCancelled;
-import mintic.Reto41.Controller.DTOs.TotalAndClient;
+import mintic.Reto41.Controller.DTOs.StatusAccount;
+import mintic.Reto41.Controller.DTOs.TopClients;
 import mintic.Reto41.Entities.Reservation;
 import mintic.Reto41.Service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +47,17 @@ public class ReservationController {
     public boolean delete(@PathVariable("id") int id) {
         return reservationService.deleteReservation(id);
     }
-    @GetMapping("/report-dates/{fecha1}/{fecha2}")
-    public List<Reservation> getReservationsBetweenDatesReport(@PathVariable("fecha1") String fecha1, @PathVariable("fecha2") String fecha2) {
-        return reservationService.getReservationsBetweenDatesReport(fecha1, fecha2);
+    @GetMapping("/report-dates/{dateA}/{dateB}")
+    public List<Reservation> getByDates(@PathVariable("dateA")String da,@PathVariable("dateB")String db ){
+        return reservationService.getReservationsByPeriod(da,db);
     }
     @GetMapping("/report-status")
-    public CompletedAndCancelled getReservationStatusReport(){
-        return reservationService.getReservationStatusReport();
+    public StatusAccount getByStatus(){
+        return reservationService.getReportByStatus();
     }
-
     @GetMapping("/report-clients")
-    public List<TotalAndClient> getTopClientsReport(){
-        return reservationService.getTopClientsReport();
+    public List<TopClients> getTopClients(){
+        return reservationService.getTopclients();
     }
 
 }

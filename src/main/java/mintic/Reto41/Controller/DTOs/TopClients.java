@@ -2,21 +2,22 @@ package mintic.Reto41.Controller.DTOs;
 
 import mintic.Reto41.Entities.Client;
 
-public class TotalAndClient {
+public class TopClients {
 
-    private Long total;
+    private int total;
     private Client client;
 
-    public TotalAndClient(Long total, Client client) {
-        this.total = total;
-        this.client = client;
+    public TopClients(int total, Client client){
+        this.total=total;
+        this.client=client;
     }
 
-    public Long getTotal() {
+
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(Long total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

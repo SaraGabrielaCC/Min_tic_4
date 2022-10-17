@@ -1,7 +1,8 @@
 package mintic.Reto41.Service;
 
-import mintic.Reto41.Controller.DTOs.CompletedAndCancelled;
-import mintic.Reto41.Controller.DTOs.TotalAndClient;
+import mintic.Reto41.Controller.DTOs.StatusAccount;
+import mintic.Reto41.Controller.DTOs.TopClients;
+import mintic.Reto41.Entities.Client;
 import mintic.Reto41.Entities.Reservation;
 import mintic.Reto41.Repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,35 +73,43 @@ public class ReservationService {
         return d;
     }
 
-    public List<Reservation> getReservationsBetweenDatesReport(String fechaA, String fechaB) {
-        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+    public List<Reservation> getReservationsByPeriod(String dateA,String dateB){
 
-        Date a = new Date();
-        Date b = new Date();
+        SimpleDateFormat parser=new SimpleDateFormat("yyyy-MM-dd");
+        Date a= new Date();
+        Date b=new Date();
         try {
-            a = parser.parse(fechaA);
-            a = parser.parse(fechaB);
-        } catch (ParseException exception) {
-            exception.printStackTrace();
+            a=parser.parse(dateA);
+            b=parser.parse(dateB);
+        }catch (ParseException e){
+            e.printStackTrace();;
         }
-        if (a.before(b)) {
-            return reservationRepository.getReservationsBetweenDates(a, b);
-        } else {
-            return new ArrayList<>();
+        if(a.before(b)){
+            return reservationRepository.getDatesReport(a,b);
+        }else{
+            return new ArrayList<Reservation>();
         }
     }
-    public CompletedAndCancelled getReservationStatusReport(){
-        List<Reservation> completed = reservationRepository.getReservationsByStatus("completed");
-        List<Reservation> cancelled = reservationRepository.getReservationsByStatus("cancelled");
+    public StatusAccount getReportByStatus(){
+        List<Reservation> completes=reservationRepository.getStatusReport("completed");
+        List<Reservation> cancelled=reservationRepository.getStatusReport("cancelled");
 
-        int cantidadCompletadas = completed.size();
-        int cantidadCanceladas = cancelled.size();
+        StatusAccount resultado=new StatusAccount(completes.size(),cancelled.size());
+        return resultado;
 
-        return new CompletedAndCancelled((long) cantidadCompletadas, (long) cantidadCanceladas);
+    }
+    public List<TopClients> getTopclients(){
+        List<TopClients> tc=new ArrayList<>();
+        List<Object[]> result= reservationRepository.getTopClients();
+
+        for(int i=0;i<result.size();i++){
+            int total=Integer.parseInt(result.get(i)[1].toString());
+            Client client= (Client) result.get(i)[0];
+            TopClients topClient=new TopClients(total,client);
+            tc.add(topClient);
+        }
+        return tc;
     }
 
-    public List<TotalAndClient> getTopClientsReport(){
-        return reservationRepository.getTopClients();
-    }
 
 }
